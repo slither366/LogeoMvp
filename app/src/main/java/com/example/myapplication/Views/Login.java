@@ -10,10 +10,13 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.example.myapplication.Interactors.User;
 import com.example.myapplication.Interfaces.ILoginPresenter;
 import com.example.myapplication.Interfaces.ILoginView;
 import com.example.myapplication.Presenters.LoginPresenterImpl;
 import com.example.myapplication.R;
+
+import es.dmoral.toasty.Toasty;
 
 public class Login extends AppCompatActivity implements ILoginView {
 
@@ -72,12 +75,25 @@ public class Login extends AppCompatActivity implements ILoginView {
     }
 
     @Override
-    public void naviteToMainView() {
-        startActivity(new Intent(Login.this, OtroActivity.class));
+    public void naviteToMainView(User usuario) {
+        Intent intent = new Intent(Login.this, OtroActivity.class);
+        intent.putExtra("usuLogin", usuario.getUser());
+        intent.putExtra("passLogin", usuario.getPassword());
+        startActivity(intent);
+        finish();
+
+        /*Intent intentImplicito = new Intent();
+        intentImplicito.setAction(Intent.ACTION_SEND);
+        intentImplicito.putExtra(Intent.EXTRA_TEXT, "Hola desde intent implicito");
+        intentImplicito.setType("text/plain");
+        if(intentImplicito.resolveActivity(getPackageManager() )!= null){
+            startActivity(intentImplicito);
+        }*/
     }
 
     @Override
     public void setErrorLogeo() {
-        Toast.makeText(this, "Los Datos Ingresados no son correctos!", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "Los Datos Ingresados no son correctos!", Toast.LENGTH_SHORT).show();
+        Toasty.error(this, "Los Datos Ingresados no son correctos!", Toast.LENGTH_SHORT).show();
     }
 }

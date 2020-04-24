@@ -21,7 +21,7 @@ public class LoginInteractorImpl implements ILoginInteractor {
             public void run() {
                 if(!user.equals("") && !pass.equals("")){
                     if(user.equals("dflores") && pass.equals("fllud001")){
-                        presenter.setNaviteHomePresenter();
+                        crearNuevoUsuario("dflores","fllud001");
                     }else{
                         presenter.setErrorLogeoPresenter();
                     }
@@ -37,4 +37,14 @@ public class LoginInteractorImpl implements ILoginInteractor {
         },2000);
 
     }
+
+    @Override
+    public void crearNuevoUsuario(String user, String pass) {
+        User usuario= new User();
+        usuario.setUser(user);
+        usuario.setPassword(pass);
+        presenter.setNaviteHomePresenter(usuario);
+    }
+
+
 }

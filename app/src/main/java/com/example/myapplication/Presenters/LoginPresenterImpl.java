@@ -1,6 +1,7 @@
 package com.example.myapplication.Presenters;
 
 import com.example.myapplication.Interactors.LoginInteractorImpl;
+import com.example.myapplication.Interactors.User;
 import com.example.myapplication.Interfaces.ILoginInteractor;
 import com.example.myapplication.Interfaces.ILoginPresenter;
 import com.example.myapplication.Interfaces.ILoginView;
@@ -41,10 +42,10 @@ public class LoginPresenterImpl implements ILoginPresenter {
     }
 
     @Override
-    public void setNaviteHomePresenter() {
+    public void setNaviteHomePresenter(User usu) {
         if(view!=null){
             view.hideProgressBar();
-            view.naviteToMainView();
+            view.naviteToMainView(usu);
         }
     }
 
